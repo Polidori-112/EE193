@@ -13,23 +13,36 @@ int main(void){
     // Setup for the red LED (GPIO port B, pin 2)
     init_red_LED();			// Set up the red LED.
     set_red_LED (1);			// Set it to initially be on
+    init_grn_LED();			// Set up the red LED.
+    set_grn_LED (1);			// Set it to initially be on
 
     // Dead loop & program hangs here
 
     //challenge 1
-    // toggle_grn_LED();
     // while(1) {
     //     ms_delay (500);			// spin-wait loop for .5 sec
     //     toggle_red_LED();		// toggle the red LED
-    //     toggle_grn_LED();
+    //     toggle_grn_LED();		// toggle the red LED
     // }
 
     // challenge 2
-    for (int i = 0; i != -1; i++) {
+    // toggle_red_LED();
+    // for (int i = 0; i >= 0; i++) {
+    //     ms_delay(1);
+    //     if (i % 500 == 0) {
+    //         toggle_red_LED();
+    //         toggle_grn_LED();
+    //     }
+    // }
+
+    // challenge 3
+    for (int i = 0; i >= 0; i++) {
         ms_delay(1);
-        if (i % 333 != 0)
-            toggle_grn_LED();
-        if (i % 500 != 0)
+        if (i % 500 == 0) {
             toggle_red_LED();
+        }
+        if (i % 333 == 0) {
+            toggle_grn_LED();
+        }
     }
 }
