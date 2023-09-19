@@ -14,20 +14,50 @@ bool do_blink_red=1, do_blink_grn=1;
 // Keep blinking as long as do_blink_red==true.
 void task_blink_red( void * pvParameters )
 {
-    // Most tasks have an infinite loop in them.
+	init_red_LED();
+
+    // Chal 1
     // for ( ;; ) {
-	// if do_blink_red==true, then blink the red LED;
-	// use vTaskDelay to pause for some time;
+	// 	vTaskDelay(500);
+	// 	toggle_red_LED();
     // }
+
+	// Chal 2
+	// for ( ;; ) {
+	// 	vTaskDelay(500);
+	// 	toggle_red_LED();
+    // }
+
+	// Chal 3
+	while(1) {
+		vTaskDelay(500);
+		toggle_red_LED();
+	}
 }
 
 // Keep blinking as long as do_blink_grn==true.
 #define BLINK_GRN_DELAY ( 500 / portTICK_PERIOD_MS )
 void task_blink_grn( void * pvParameters )
 {
-    for ( ;; ) {
-	//... just like the red task, but now for the green LED;
-    }
+	init_grn_LED();
+	// Chal 1
+    // for ( ;; ) {
+	// 	vTaskDelay(500);
+	// 	toggle_grn_LED();
+    // }
+
+	// Chal 2
+	// vTaskDelay(500);
+	// while(1) {
+	// 	vTaskDelay(500);
+	// 	toggle_grn_LED();
+	// }
+
+	// Chal 3
+	while(1) {
+		vTaskDelay(333);
+		toggle_grn_LED();
+	}
 }
 
 void task_uart (void *pvParameters) {
@@ -78,8 +108,8 @@ int main() {
 	    &task_handle_grn);
     if (task_grn_OK != pdPASS) for ( ;; );
 
-/*
-    UART task is commented out at first...
+
+    // UART task is commented out at first...
 
     TaskHandle_t task_handle_uart = NULL;
     BaseType_t task_uart_OK = xTaskCreate (
@@ -87,10 +117,10 @@ int main() {
 	    "Decide which LEDs to blink",
 	    100, // stack size in words
 	    NULL, // parameter passed into task, e.g. "(void *) 1"
-	    tskIDLE_PRIORITY+???, // what priority, vs. the LED tasks?
+	    tskIDLE_PRIORITY, // what priority, vs. the LED tasks?
 	    &task_handle_uart);
     if (task_uart_OK != pdPASS) for ( ;; );
-*/
+
 
     vTaskStartScheduler();
 }
