@@ -20,8 +20,8 @@ void task_blink_red( void * pvParameters )
     for ( ;; ) {
 	if (do_blink_red) {
 	    toggle_red_LED();
-	    vTaskDelay( BLINK_RED_DELAY );
 	}
+	vTaskDelay( BLINK_RED_DELAY );
     }
 }
 
@@ -32,8 +32,8 @@ void task_blink_green( void * pvParameters )
     for ( ;; ) {
 	if (do_blink_grn) {
 	    toggle_grn_LED();
-	    vTaskDelay( BLINK_GREEN_DELAY );
 	}
+	vTaskDelay( BLINK_GREEN_DELAY );
     }
 }
 
@@ -88,7 +88,7 @@ int main() {
     BaseType_t task_create_uart = xTaskCreate (
 	    task_uart,
 	    "Decide which LEDs to blink",
-	    100, // stack size in words
+	    500, // stack size in words
 	    NULL, // parameter passed into task, e.g. "(void *) 1"
 	    tskIDLE_PRIORITY+1, // priority
 	    &task_handle_uart);

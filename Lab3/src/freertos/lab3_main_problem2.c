@@ -48,13 +48,15 @@ void task_blink (void *pvParameters)
 int main() {
     //clock_setup_16MHz();
     clock_setup_80MHz();
-
+    
     // Set up GPIO.
     GPIO_set_output (GPIOB, 2);	// Red is B2
     GPIO_set_output (GPIOE, 8);	// Grn is E8
 
     //ADC_Init();
     DAC2_Init();
+    //set up ADC
+    ADC_Init();
 
     // Create tasks.
     TaskHandle_t task_handle_LEDs = NULL;
