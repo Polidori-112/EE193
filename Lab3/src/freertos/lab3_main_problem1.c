@@ -56,7 +56,7 @@ void task_uart (void *pvParameters) {
 }
 
 int main() {
-    system_clock_init();	// 80 MHz, AHB and APH1/2 prescale=1x
+    clock_setup_80MHz();	// 80 MHz, AHB and APH1/2 prescale=1x
     UART2_Init();
 
     // Set up GPIO.
