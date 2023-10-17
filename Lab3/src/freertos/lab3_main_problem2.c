@@ -64,7 +64,7 @@ int main() {
 	task_blink, "Blink LEDs",
 	100, // stack size in words
 	NULL, // parameter passed into task, e.g. "(void *) 1"
-	tskIDLE_PRIORITY, // priority
+	tskIDLE_PRIORITY+1, // priority
 	&task_handle_LEDs);
     if (task_create_OK != pdPASS) for ( ;; );
 
@@ -73,7 +73,7 @@ int main() {
 	task_read_adc_filter_write_dac,	"Read ADC; filter; write to dac",
 	256, // stack size in words
 	NULL, // parameter passed into task, e.g. "(void *) 1"
-	tskIDLE_PRIORITY + 1, // priority
+	tskIDLE_PRIORITY, // priority
 	&task_handle_read_write);
     if (task_create_read_write_OK != pdPASS) for ( ;; );
 
