@@ -1,5 +1,6 @@
 {
     "files.associations": {
         "adc_dac.h": "c"
-    }
+    },
+    "cmake.configureOnOpen": false
 }
