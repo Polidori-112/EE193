@@ -19,6 +19,10 @@ String nums[10] = {
     "1110011"
   };
 
+
+int in1pin = 11; //PWM pin
+int in2pin = 12; // non PWM pin
+
 // Set up the brain parser, pass it the hardware serial object you want to listen on.
 SoftwareSerial mySerial(0, 1); // RX, TX
 Brain brain(mySerial);
@@ -32,6 +36,8 @@ void setup() {
   }
   setPinsFromBinaryString("1101001");
 
+  pinMode(in1pin, OUTPUT);
+  pinMode(in2pin, OUTPUT);
 }
 
 void setPinsFromBinaryString(String binaryString) {
@@ -59,7 +65,7 @@ int extractValueBetweenCommas(String inputString) {
   // Check if both commas are found
   if (commaIndex2 != -1 && commaIndex3 != -1) {
     // Extract the substring between the first and second commas
-    String valueString = inputString.substring(commaIndex2 + 1, commaIndex3);
+    String valueString = inputString.substring(commaIndex1 + 1, commaIndex2);
 
     // Convert the substring to an integer
     int extractedValue = valueString.toInt();
@@ -83,5 +89,16 @@ void loop() {
         Serial.println((values));
         setPinsFromBinaryString(nums[(int)(extractValueBetweenCommas(values)/15)]);
 
+        int attention = extractValueBetweenCommas(values);
+        if((attention/15) > 4)
+        {
+          digitalWrite(in1pin, HIGH);
+          digitalWrite(in2pin, LOW);
+        }
+        else
+        {
+          digitalWrite(in1pin, LOW);
+          digitalWrite(in2pin, HIGH);
+        }
     }
 }
